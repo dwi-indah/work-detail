@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@layer components {
+    .quote {
+        position: relative;
+        display: inline;
+        quotes: "“" "”" "‘" "’";
+    }
+    .quote:before {
+        left: 0;
+        top: 0;
+        display: block;
+        position: absolute;
+        transform: translate3d(-100%, 0, 0);
+        content: open-quote;
+    }
+    .quote:after {
+        content: close-quote;
+    }
+
+    .workDetail-trigger {
+        transform: translateX(-50%);
+        @media (min-width: 64rem) {
+            transform: none;
+
+        }
+    }
+
+    .workContent {
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+    }
+
+    .workDetail.is-open .workContent {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+    }
+
+}
