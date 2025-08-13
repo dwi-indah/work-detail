@@ -1057,11 +1057,6 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-  .transition-\[opacity\] {
-    transition-property: opacity;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
   .transition-\[width\] {
     transition-property: width;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -1674,13 +1669,6 @@
       line-height: var(--tw-leading, var(--text-5xl--line-height));
     }
   }
-  .lg\:transition-\[width\] {
-    @media (width >= 64rem) {
-      transition-property: width;
-      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-      transition-duration: var(--tw-duration, var(--default-transition-duration));
-    }
-  }
   .xl\:pr-12 {
     @media (width >= 80rem) {
       padding-right: calc(var(--spacing) * 12);
@@ -1830,7 +1818,7 @@
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    @media (min-width: 64rem) {
+    @media (min-width: 48rem) {
       transform: unset;
       position: relative;
       bottom: unset;
@@ -1847,16 +1835,16 @@
   }
   .workContent {
     visibility: hidden;
-    display: none;
+    opacity: 0;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out !important;
-    @media (min-width: 64rem) {
+    display: block;
+    @media (min-width: 48rem) {
       position: relative;
+      width: 0;
       top: unset;
       left: unset;
       bottom: unset;
@@ -1870,9 +1858,17 @@
     visibility: visible;
     opacity: 1;
     display: block;
+    transition: opacity 1s ease-out, visibility 1s ease-out;
   }
-  .workItem {
+  .workDesc {
     transition: width .5s ease !important;
+  }
+  .workItem.open {
+    width: calc(1/2 * 100%);
+  }
+  .workDesc {
+    width: 100%;
+    display: block;
   }
 }
 @property --tw-translate-x {
