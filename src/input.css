@@ -23,7 +23,7 @@
         bottom: 24px;
         left: 50%;
         transform: translateX(-50%);
-        @media (min-width: 64rem) {
+        @media (min-width: 48rem) {
             transform: unset;
             position: relative;
             bottom: unset;
@@ -42,16 +42,17 @@
 
     .workContent {
         visibility: hidden;
-        display: none;
+        opacity: 0;
         position: fixed;
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out !important;
-        @media (min-width: 64rem) {
+        display: block;
+        @media (min-width: 48rem) {
             position: relative;
+            /* display: none; */
+            width: 0;
             top: unset;
             left: unset;
             bottom: unset;
@@ -67,10 +68,20 @@
         visibility: visible;
         opacity: 1;
         display: block;
+        transition: opacity 1s ease-out, visibility 1s ease-out;
     }
 
-    .workItem {
+    .workDesc {
         transition: width .5s ease !important;
+    }
+    
+    .workItem.open {
+        width: calc(1/2 * 100%);
+    }
+    
+    .workDesc {
+        width: 100%;
+        display: block;
     }
 
 }
