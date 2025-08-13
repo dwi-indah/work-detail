@@ -1,11 +1,14 @@
 let btnTrigger = document.getElementById('workTrigger');
 let workDetail = document.getElementById("workDetail");
+let workContent = document.getElementById("workAbout");
 
 if (!!btnTrigger) {
     btnTrigger.addEventListener("click", function () {
-        workDetail.classList.toggle('is-open');
         btnTrigger.classList.toggle('is-open');
-        if (window.innerWidth > 1024) {
+        workDetail.classList.toggle('is-open');
+        
+        if (window.innerWidth > 768) {
+            workDetail.classList.toggle('md:gap-8');
             let workCol = document.querySelectorAll('.workItem');
             workCol.forEach(el => {
                 el.classList.toggle('w-1/2');
@@ -19,34 +22,35 @@ if (!!btnTrigger) {
             let elToScroll = document.getElementById('workAbout-inner');
             scrollBottom(elToScroll, workDetail);
 
+            let farFromTop = window.scrollY;
+            let notOpen = workDetail.classList.contains('is-open');
+            if (notOpen) {
+                if(farFromTop > 350) {
+                    scrollToTop()
+                }
+            }
+
         }
     })
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth > 768) {
         addFixed(btnTrigger);
     }
 }
 
 function scrollBottom(el, elParent) {
-    const bodyElement = document.body;
-    const rect = bodyElement.getBoundingClientRect().top;
 
-    if (rect <= -250) {
-        console.log("true")
-        scrollToTop()
-    }
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const elOffset = el.getBoundingClientRect().height - 120;
         const parentHeight = elParent.getBoundingClientRect().height - 120;
-        const elWidth = el.getBoundingClientRect().width;
-        console.log(scrollY, parentHeight, elParent.getBoundingClientRect())
-
+        const elWidth = el.parentNode.clientWidth;
+        console.log(elWidth)
+        el.style.width = `${elWidth}px`;
+    
         if (scrollY >= elOffset) {
             el.classList.add('pinned');
             el.classList.add('fixed');
-            el.style.width = `${elWidth}px`;
             if (scrollY >= parentHeight) {
-                console.log('true')
                 el.classList.remove('fixed');
                 el.classList.add('absolute');
             } else {
@@ -61,7 +65,6 @@ function scrollBottom(el, elParent) {
 
 function addFixed(el) {
     window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
         const elHeight = el.getBoundingClientRect().top;
         const parentHeight = workDetail.getBoundingClientRect().top;
         if (elHeight <= 26) {
