@@ -19,23 +19,58 @@
     }
 
     .workDetail-trigger {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
         transform: translateX(-50%);
         @media (min-width: 64rem) {
-            transform: none;
-
+            transform: unset;
+            position: relative;
+            bottom: unset;
+            left: unset;
         }
+    }
+    .workDetail-trigger.pinned {
+        position: fixed;
+        top: 24px;
+        right: 32px;
+    }
+
+    .workDetail-trigger.is-open .icoPlus {
+        transform: rotate(45deg);
     }
 
     .workContent {
         visibility: hidden;
-        opacity: 0;
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out !important;
+        @media (min-width: 64rem) {
+            position: relative;
+            top: unset;
+            left: unset;
+            bottom: unset;
+            right: unset;
+        }
+    }
+
+    .workContent-inner.pinned {
+        bottom: 24px;
     }
 
     .workDetail.is-open .workContent {
         visibility: visible;
         opacity: 1;
         display: block;
+    }
+
+    .workItem {
+        transition: width .5s ease !important;
     }
 
 }
