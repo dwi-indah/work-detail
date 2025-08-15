@@ -60,6 +60,12 @@
         }
     }
 
+    .workContent-inner {
+        @media (min-width: 48rem) {
+            padding: 0 !important;
+        }
+    }
+
     .workContent-inner.pinned {
         bottom: 24px;
     }
